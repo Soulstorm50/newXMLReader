@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario>
+	<event>
+		<time>5</time>
+		<indicators>
+			<100>1</100>
+			<101>5</101>
+			<102>15</102>
+		</indicators>
+	</event>
+	<event>
+		<time>10</time>
+		<indicators>
+			<103>1</103>
+			<104>5</104>
+			<105>15</104>
+		</indicators>		
+	</event>
+	<event>
+		<time>15</time>
+		<indicators>
+			<106>1</106>
+			<107>5</107>
+			<108>15</108>
+		</indicators>		
+	</event>
+	<event>
+		<time>20</time>
+		<indicators>
+			<109>1</109>
+			<110>5</110>
+			<111>15</111>
+		</indicators>		
+	</event>	
+</scenario>

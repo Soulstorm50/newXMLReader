@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<script>
+		<event>
+			<time> 5 </time>
+			<clock> 1 </clock>
+			<browser> 5 </browser>
+			<radio> 15 </radio>
+		</event>
+		
+		<event>
+			<time> 10 </time>
+			<car_info> 20 </car_info>
+			<climate_control> 25 </climate_control>
+			<termometr> 30 </termometr>
+		</event>
+		
+		<event>
+			<time> 15 </time>
+			<speedometr> 35 </speedometr>
+			<steering> 40 </steering>
+			<right_turn> 45 </right_turn>
+		</event>
+		
+		<event>
+			<time> 20 </time>
+			<left_turn> 50 </left_turn>
+			<oil> 40 </oil>
+		</event>
+	</script>
