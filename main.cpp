@@ -18,7 +18,7 @@
 int main()
 {
     CXmlReader reader;
-    CXmlCompositeComp xmlCompComp = reader.getCompositeCompFromXmlFile("D:\\odstudents\\newXMLReader\\xml\\test2.xml");
+    CXmlCompositeComp xmlCompComp = reader.getCompositeCompFromXmlFile("D:\\odstudents\\newXMLReader\\xml\\test3.xml");
 
 
 

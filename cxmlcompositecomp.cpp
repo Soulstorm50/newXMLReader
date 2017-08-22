@@ -18,7 +18,7 @@ CXmlCompositeComp *CXmlCompositeComp::GetComposite()
 
 void CXmlCompositeComp::Add(IXmlComp *component)
 {
-    qDebug() <<QTime::currentTime().toString()<< "Trying add element in comp comp!";
+    qDebug() <<QTime::currentTime().toString()<< "Add element " << component->getName() << " in " << this->getName();
     vectComp.push_back(component);
 }
 
@@ -43,7 +43,8 @@ IXmlComp *CXmlCompositeComp::GetChild(int index)
 
 IXmlComp *CXmlCompositeComp::GetLastChild()
 {
-    std::vector<IXmlComp*>::iterator it = vectComp.end();
+    //std::vector<IXmlComp*>::iterator it = vectComp.end();
+    std::vector<IXmlComp*>::iterator it = vectComp.begin() + (vectComp.size() - 1);
     return *it;
 }
 

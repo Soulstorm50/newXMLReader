@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario>
+
+	<event1>	
+		<time>5</time>
+		<clock> 1 </clock>
+		<browser> 5 </browser>
+		<radio> 15 </radio>
+	</event1>
+	
+	<event2>	
+		<time>5</time>
+		<car_info> 20 </car_info>
+		<climate_control> 25 </climate_control>
+		<termometr> 30 </termometr>
+	</event2>
+	
+	<event3>	
+		<time>5</time>
+		<speedometr> 35 </speedometr>
+		<steering> 40 </steering>
+		<right_turn> 45 </right_turn>
+	</event3>
+	
+	<event4>	
+		<time>5</time>
+		<left_turn> 50 </left_turn>
+		<oil> 40 </oil>
+	</event4>
+
+</scenario>

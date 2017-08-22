@@ -19,19 +19,12 @@ CXmlCompositeComp CXmlReader::getCompositeCompFromXmlFile(const QString path)
 
     IXmlComp *ptrParentComp;
 
-    int count = -1;
-
-
-
-
-
-
     QFile file(path);
 
     //check is file open
     if(file.open(QIODevice::ReadOnly |QIODevice::Text)) // check
     {
-        qDebug() <<QTime::currentTime().toString()<< "Start reading xml file scenario.xml";
+        qDebug() <<QTime::currentTime().toString()<< "Start reading xml file";
 
         while(!file.atEnd())
         {
@@ -44,7 +37,7 @@ CXmlCompositeComp CXmlReader::getCompositeCompFromXmlFile(const QString path)
             int pos = 0;
 
                 //skip empty line and first xml line
-            if(str.trimmed() == "" || str.trimmed()[1] == '?' )
+            if(str.trimmed() == "" || str.trimmed()[1] == '?')
             {
                 continue;
             } // code style
@@ -77,14 +70,14 @@ CXmlCompositeComp CXmlReader::getCompositeCompFromXmlFile(const QString path)
             if(openTag != "" && value == "" && closeTag == "")
             {
                 ptrCurrentComp->Add(new CXmlCompositeComp(openTag));
-                count++;
+                ptrParentComp = ptrCurrentComp;
+                ptrCurrentComp = ptrParentComp->GetLastChild();
             }
 
             //create primitive component
             else if(openTag != "" && value != "" && closeTag == "")
             {
-                ptrParentComp = ptrCurrentComp;
-                ptrCurrentComp = xmlCompComp.GetChild(count);
+
                 ptrCurrentComp->Add(new CXmlPrimitiveComp(openTag, value));
             }
 
@@ -92,33 +85,15 @@ CXmlCompositeComp CXmlReader::getCompositeCompFromXmlFile(const QString path)
             else if(openTag == "" && value == "" && closeTag != "")
             {
                 ptrCurrentComp = ptrParentComp;
-                count = ptrCurrentComp->getSize();
+
             }
         }
-
-            qDebug() <<QTime::currentTime().toString()<< "Done reading xml file scenario.xml";
+            qDebug() <<QTime::currentTime().toString()<< "Done reading xml file";
     }
     else
     {
-        qDebug() <<QTime::currentTime().toString()<< "Can't read xml file scenario.xml";
+        qDebug() <<QTime::currentTime().toString()<< "Can't read xml file";
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     return xmlCompComp;
 }
