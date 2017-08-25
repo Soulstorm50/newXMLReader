@@ -1,6 +1,7 @@
 #include "ixmlcomp.h"
 #include "cxmlprimitivecomp.h"
 #include "cxmlcompositecomp.h"
+#include "cscenariomanager.h"
 
 #include "ixmlreader.h"
 #include "cxmlreader.h"
@@ -17,8 +18,23 @@
 
 int main()
 {
-    CXmlReader reader;
-    CXmlCompositeComp xmlCompComp = reader.getCompositeCompFromXmlFile("D:\\odstudents\\newXMLReader\\xml\\test3.xml");
+
+
+    CScenarioManager manager;
+
+    qDebug() << manager.prepareScenario();
+
+
+
+
+
+
+
+
+
+
+     //CXmlReader reader;
+    //CXmlCompositeComp xmlCompComp = reader.getCompositeCompFromXmlFile("D:\\111\\odstudents\\newXMLReader\\xml\\test3.xml");
 
 
 

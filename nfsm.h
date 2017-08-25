@@ -12,7 +12,12 @@ namespace Nfsm
 //-------------------------- xml patch -----------------------------------------
 
     const QString xmlCarTypes = "D:\\111\\odstudents\\src\\Backend\\xml\\cartypes.xml";
-    const QString xmlScenario = "D:\\111\\odstudents\\src\\Backend\\xml\\test2.xml";
+    const QString xmlScenario = "D:\\111\\odstudents\\newXMLReader\\xml\\test4_w_id.xml";
+
+//-------------------------- key components ------------------------------------
+    const QString EVENT_COMPOSITE = "event";
+    const QString TIME_COMPONENT = "time";
+
 
 //-------------------------- car types  ----------------------------------------
     const qint32 LEFT_HAND_CAR_TYPE = 300;
@@ -47,7 +52,7 @@ namespace Nfsm
     const int COUNT_MILISECONDS = 1000;
 
     //-------------- indicators ID ---------------------------------------------
-    const qint32 CLOCK_INDICATRO_ID = 100;
+    const qint32 CLOCK_INDICATOR_ID = 100;
     const qint32 BROWSER_INDICATOR_ID  = 101;
     const qint32 RADIO_INDICATOR_ID = 102;
     const qint32 CAR_INFO_INDICATOR_ID = 103;
