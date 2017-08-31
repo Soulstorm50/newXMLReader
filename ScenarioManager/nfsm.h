@@ -11,11 +11,18 @@ namespace Nfsm
 
 //-------------------------- xml patch -----------------------------------------
 
+<<<<<<< HEAD:ScenarioManager/nfsm.h
     const QString XML_CAR_TYPES = "D:\\111\\odstudents\\src\\Backend\\xml\\cartypes.xml";
     const QString XML_SCENARIO = "D:\\111\\odstudents\\newXMLReader\\xml\\test4_w_id.xml";
 
 //-------------------------- key components ------------------------------------
     const QString ROOT_COMPONENT = "root";
+=======
+    const QString xmlCarTypes = "D:\\111\\odstudents\\src\\Backend\\xml\\cartypes.xml";
+    const QString xmlScenario = "D:\\111\\odstudents\\newXMLReader\\xml\\test4_w_id.xml";
+
+//-------------------------- key components ------------------------------------
+>>>>>>> bf4cd26484f02ced9dc5fc4318345ae5014c1019:nfsm.h
     const QString EVENT_COMPOSITE = "event";
     const QString TIME_COMPONENT = "time";
 
