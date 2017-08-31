@@ -1,34 +1,27 @@
 #include "cxmlreader.h"
 
-CXmlReader::CXmlReader()
+CXmlReader::CXmlReader(const QString &path) : xmlFile(path)
+                                             ,componentTree(Nfsm::ROOT_COMPONENT)
 {
 
 }
 
-CXmlReader::~CXmlReader()
+const CXmlCompositeComp& CXmlReader::getCompTreeFromXmlFile() const
 {
 
-}
+    const IXmlComp *ptrCurrentComp = &componentTree;
+    const IXmlComp *ptrParentComp;
 
-
-CXmlCompositeComp CXmlReader::getCompositeCompFromXmlFile(const QString path)
-{
-    CXmlCompositeComp xmlCompComp;
-
-    IXmlComp *ptrCurrentComp = &xmlCompComp;
-
-    IXmlComp *ptrParentComp;
-
-    QFile file(path);
+    //QFile file(pathToXmlFile);
 
     //check is file open
-    if(file.open(QIODevice::ReadOnly |QIODevice::Text)) // check
+    if(xmlFile.open(QIODevice::ReadOnly |QIODevice::Text)) // check
     {
         qDebug() <<QTime::currentTime().toString()<< "Start reading xml file";
 
-        while(!file.atEnd())
+        while(!xmlFile.atEnd())
         {
-            QString str = file.readLine();
+            QString str = xmlFile.readLine();
             QString openTag;
             QString value;
             QString closeTag;
@@ -69,16 +62,16 @@ CXmlCompositeComp CXmlReader::getCompositeCompFromXmlFile(const QString path)
             //create composite component and pull in
             if(openTag != "" && value == "" && closeTag == "")
             {
-                ptrCurrentComp->Add(new CXmlCompositeComp(openTag));
+                ptrCurrentComp->addComp(new CXmlCompositeComp(openTag));
                 ptrParentComp = ptrCurrentComp;
-                ptrCurrentComp = ptrParentComp->GetLastChild();
+                ptrCurrentComp = ptrParentComp->getVectorChilds().last();
             }
 
             //create primitive component
             else if(openTag != "" && value != "" && closeTag == "")
             {
 
-                ptrCurrentComp->Add(new CXmlPrimitiveComp(openTag, value));
+                ptrCurrentComp->addComp(new CXmlPrimitiveComp(openTag, value));
             }
 
             // out from composite component
@@ -89,11 +82,17 @@ CXmlCompositeComp CXmlReader::getCompositeCompFromXmlFile(const QString path)
             }
         }
             qDebug() <<QTime::currentTime().toString()<< "Done reading xml file";
+
     }
     else
     {
         qDebug() <<QTime::currentTime().toString()<< "Can't read xml file";
     }
 
-    return xmlCompComp;
+    return componentTree;
+}
+
+CXmlReader::~CXmlReader()
+{
+    //???
 }
