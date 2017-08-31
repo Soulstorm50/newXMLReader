@@ -10,17 +10,15 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    ixmlcomp.cpp \
-    cxmlcompositecomp.cpp \
-    cxmlprimitivecomp.cpp \
     citerator.cpp \
-    ixmlreader.cpp \
+    ixmlcomponent.cpp \
+    cxmlprimitivecomponent.cpp \
+    cxmlcompositecomponent.cpp \
     cxmlreader.cpp \
     seventdata.cpp \
     crouteevent.cpp \
-    citerator.cpp \
-    iscenariomanager.cpp \
-    cscenariomanager.cpp
+    ixmldatamanager.cpp \
+    cxmldatamanager.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -34,15 +32,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 HEADERS += \
-    ixmlcomp.h \
-    cxmlcompositecomp.h \
-    cxmlprimitivecomp.h \
     nfsm.h \
     citerator.h \
-    ixmlreader.h \
+    ixmlcomponent.h \
+    cxmlprimitivecomponent.h \
+    cxmlcompositecomponent.h \
     cxmlreader.h \
     seventdata.h \
     crouteevent.h \
-    citerator.h \
-    iscenariomanager.h \
-    cscenariomanager.h
+    ixmldatamanager.h \
+    cxmldatamanager.h

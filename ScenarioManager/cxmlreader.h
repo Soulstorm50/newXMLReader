@@ -1,28 +1,44 @@
 #ifndef CXMLREADER_H
 #define CXMLREADER_H
 
-#include"ixmlreader.h"
+#include "cxmlcompositecomponent.h"
+#include "cxmlprimitivecomponent.h"
+#include "ixmlcomponent.h"
+#include "nfsm.h"
+#include <memory>
+#include <QFile>
+#include <QString>
+#include <QRegExp>
+#include <QDebug>
+#include <QTime>
 
-#include<QFile>
-#include<QString>
-#include<QRegExp>
-#include<QDebug>
-#include<QTime>
 
-class CXmlReader : public IXmlReader
+using namespace Nfsm;
+
+
+class CXmlReader
 {
+
+
 public:
-    CXmlReader(const QString& path);
 
-    virtual const CXmlCompositeComp& getCompTreeFromXmlFile() const override;
+    static const shared_ptr<IXmlComponent> read(const QString& filePath); // change return type (IXmlRe
 
-    virtual ~CXmlReader() override;
+    // static method
+   // virtual ~IXmlReader() = 0;
 
 private:
+    //TODO: add ctors; operator=; dtor
 
-    QString pathToXmlFile;
-    QFile xmlFile;
-    CXmlCompositeComp componentTree;
+    CXmlReader() = delete;
+    CXmlReader(const CXmlReader&) = delete;
+    CXmlReader& operator=( const CXmlReader& ) = delete;
+
+
+
+    ~CXmlReader();
+
+
 };
 
 #endif // CXMLREADER_H

@@ -1,98 +1,86 @@
 #include "cxmlreader.h"
 
-CXmlReader::CXmlReader(const QString &path) : xmlFile(path)
-                                             ,componentTree(Nfsm::ROOT_COMPONENT)
+const shared_ptr<IXmlComponent> CXmlReader::CXmlReader::read(const QString &filePath)
 {
+    QFile xmlFile(filePath);
 
-}
+    xmlFile.open(QIODevice::ReadOnly |QIODevice::Text);
 
-const CXmlCompositeComp& CXmlReader::getCompTreeFromXmlFile() const
-{
+    shared_ptr<IXmlComponent> sptrComponentTree(new CXmlCompositeComponent(ROOT_COMPONENT));
+    shared_ptr<IXmlComponent> sptrParentComp = sptrComponentTree;
 
-    const IXmlComp *ptrCurrentComp = &componentTree;
-    const IXmlComp *ptrParentComp;
+    QString str;
+    QString openTag;
+    QString value;
+    QString closeTagText;
 
-    //QFile file(pathToXmlFile);
+    qDebug() <<QTime::currentTime().toString()<< "Start reading xml file";
 
-    //check is file open
-    if(xmlFile.open(QIODevice::ReadOnly |QIODevice::Text)) // check
+    while(!xmlFile.atEnd())
     {
-        qDebug() <<QTime::currentTime().toString()<< "Start reading xml file";
+        str = xmlFile.readLine();
+        QString closeTag;
+        int pos = INDEX_0;
 
-        while(!xmlFile.atEnd())
+        while ((pos = OPEN_TAG_REGEXP.indexIn(str, pos)) != INDEX_NEGATIVE)
         {
-            QString str = xmlFile.readLine();
-            QString openTag;
-            QString value;
-            QString closeTag;
+            openTag = OPEN_TAG_REGEXP.cap(INDEX_1).trimmed();
+            closeTagText = CLOSE_TAG_REGEXP_STR.arg(openTag);
+            QRegExp closeRx(closeTagText);
+            pos += OPEN_TAG_REGEXP.matchedLength();
+            int closePos = INDEX_0;
 
-            QRegExp openRx("<([^>]+)>");
-            int pos = 0;
-
-                //skip empty line and first xml line
-            if(str.trimmed() == "" || str.trimmed()[1] == '?')
+            if ((closePos = closeRx.indexIn(str, pos)) != INDEX_NEGATIVE)
             {
-                continue;
-            } // code style
-
-            while ((pos = openRx.indexIn(str, pos)) != -1)
-            {
-                openTag = openRx.cap(1).trimmed();
-                QString closeTag(QString("([^<]*)</%1>").arg(openTag));
-                QRegExp closeRx(closeTag);
-                pos += openRx.matchedLength();
-                int closePos = 0;
-
-                if ((closePos = closeRx.indexIn(str, pos)) != -1)
-                {
-                    value = closeRx.cap(1).trimmed();
-                    pos = closePos + closeRx.matchedLength();
-                }
-            }
-
-                //removing close tag mark ('/')
-            if(openTag[0] == '/')
-            {
-                openTag[0] = ' ';
-                closeTag = openTag.trimmed();
-                openTag = "";
-            }
-
-
-            //create composite component and pull in
-            if(openTag != "" && value == "" && closeTag == "")
-            {
-                ptrCurrentComp->addComp(new CXmlCompositeComp(openTag));
-                ptrParentComp = ptrCurrentComp;
-                ptrCurrentComp = ptrParentComp->getVectorChilds().last();
-            }
-
-            //create primitive component
-            else if(openTag != "" && value != "" && closeTag == "")
-            {
-
-                ptrCurrentComp->addComp(new CXmlPrimitiveComp(openTag, value));
-            }
-
-            // out from composite component
-            else if(openTag == "" && value == "" && closeTag != "")
-            {
-                ptrCurrentComp = ptrParentComp;
-
+                value = closeRx.cap(INDEX_1).trimmed();
+                pos = closePos + closeRx.matchedLength();
             }
         }
-            qDebug() <<QTime::currentTime().toString()<< "Done reading xml file";
 
-    }
-    else
-    {
-        qDebug() <<QTime::currentTime().toString()<< "Can't read xml file";
+        //removing close tag mark ('/')
+        if(openTag[INDEX_0] == CHARACTER_SLASH)
+        {
+            openTag.remove(INDEX_0);
+            closeTag = openTag;
+            openTag = EMPTY_STRING;
+        }
+
+        if(openTag[INDEX_0] == CHARACTER_QUESTION)
+        {
+            qDebug() <<QTime::currentTime().toString()<< "YES its XML!!!!!!!!!!";
+        }
+
+        //create composite component and pull in
+        else if(!(openTag.isEmpty()) && value.isEmpty() && closeTag.isEmpty())
+        {
+            sptrComponentTree.get()->add(shared_ptr<IXmlComponent>(new CXmlCompositeComponent(openTag)));
+            sptrParentComp = sptrComponentTree;
+            sptrComponentTree = sptrParentComp.get()->getVectorChilds().last();
+        }
+
+        //create primitive component
+        else if(!(openTag.isEmpty()) && !(value.isEmpty()) && closeTag.isEmpty())
+        {
+            sptrComponentTree.get()->add(shared_ptr<IXmlComponent>(new CXmlPrimitiveComponent(openTag, value)));
+        }
+
+        // out from composite component
+        else if(openTag.isEmpty() && value.isEmpty() && !(closeTag.isEmpty()))
+        {
+            sptrComponentTree = sptrParentComp;
+        }
     }
 
-    return componentTree;
+    qDebug() <<QTime::currentTime().toString()<< "Done reading xml file";
+
+    xmlFile.close();
+
+    return sptrComponentTree;
+
 }
 
-CXmlReader::~CXmlReader()
+
+CXmlReader::CXmlReader::~CXmlReader()
 {
-    //???
+
 }
