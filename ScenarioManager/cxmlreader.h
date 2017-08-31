@@ -12,32 +12,22 @@
 #include <QDebug>
 #include <QTime>
 
-
 using namespace Nfsm;
-
 
 class CXmlReader
 {
 
-
 public:
 
-    static const shared_ptr<IXmlComponent> read(const QString& filePath); // change return type (IXmlRe
-
-    // static method
-   // virtual ~IXmlReader() = 0;
+    static const shared_ptr<IXmlComponent> read(const QString& filePath);
 
 private:
-    //TODO: add ctors; operator=; dtor
 
     CXmlReader() = delete;
     CXmlReader(const CXmlReader&) = delete;
     CXmlReader& operator=( const CXmlReader& ) = delete;
 
-
-
     ~CXmlReader();
-
 
 };
 

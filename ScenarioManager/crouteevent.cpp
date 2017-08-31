@@ -16,6 +16,12 @@ CIterator<SEventData> &CRouteEvent::getIterator()
     return m_iterator;
 }
 
+void CRouteEvent::clear()
+{
+    m_eventTime = DEFAULT_VALUE;
+    m_dataIndicatorCollection.clear();
+}
+
 CRouteEvent::~CRouteEvent()
 {
 

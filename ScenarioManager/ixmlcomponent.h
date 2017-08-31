@@ -6,8 +6,10 @@
 #include <memory>
 #include <QDebug>
 #include <QTime>
+#include "nfsm.h"
 
 using std::shared_ptr;
+using namespace Nfsm;
 
 class IXmlComponent
 {

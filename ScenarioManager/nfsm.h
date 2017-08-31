@@ -13,7 +13,7 @@ namespace Nfsm
 //-------------------------- xml patch -----------------------------------------
 
     const QString XML_CAR_TYPES = "D:\\111\\odstudents\\src\\Backend\\xml\\cartypes.xml";
-    const QString XML_SCENARIO = "D:\\111\\odstudents\\newXMLReader\\xml\\test3.xml";
+    const QString XML_SCENARIO = "D:\\odstudents\\newXMLReader\\xml\\test3.xml";
 
 //-------------------------- key components ------------------------------------
     const QString ROOT_COMPONENT = "root";

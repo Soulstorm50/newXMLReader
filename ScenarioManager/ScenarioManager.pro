@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     seventdata.cpp \
     crouteevent.cpp \
     ixmldatamanager.cpp \
-    cxmldatamanager.cpp
+    cxmldatamanager.cpp \
+    citerator.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -41,4 +42,5 @@ HEADERS += \
     seventdata.h \
     crouteevent.h \
     ixmldatamanager.h \
-    cxmldatamanager.h
+    cxmldatamanager.h \
+    citerator.h

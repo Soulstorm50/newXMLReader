@@ -5,12 +5,14 @@
 #include"cxmlprimitivecomponent.h"
 
 #include "cxmlreader.h"
+#include "cxmldatamanager.h"
+#include "crouteevent.h"
+#include "seventdata.h"
 
-#include"nfsm.h"
+#include "nfsm.h"
 
-#include"cxmlreader.h"
-
-#include<QDebug>
+#include <QDebug>
+#include <vector>
 
 using namespace std;
 
@@ -42,8 +44,21 @@ qDebug() << comp.get()->getName();
 
 
 
+CXmlDataManager manager(XML_SCENARIO);
 
 
+vector<CRouteEvent> events;
+
+CRouteEvent event;
+SEventData data;
+event.addEventData(data);
+event.setEventTime(30);
+
+
+events.push_back(event);
+
+
+qDebug() << manager.isReady();
 
 
 

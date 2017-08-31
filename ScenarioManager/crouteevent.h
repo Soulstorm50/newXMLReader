@@ -17,6 +17,7 @@ public:
     void setEventTime(const qint32& time);
     const qint32& getTimeEvent()const;
     CIterator<SEventData>& getIterator();
+    void clear();
     ~CRouteEvent();
 
 private:

@@ -14,10 +14,16 @@ class IXmlDataManager
 {
 public:
 
-    virtual CIterator<CRouteEvent>& getRouteEvents()const = 0;
-    virtual bool prepareRouteEvents(const QString& filePath)const = 0;
+    virtual CIterator<CRouteEvent>& getRouteEvents() = 0;
+    virtual void prepareRouteEvents(const QString& filePath) = 0;
+    virtual bool isReady() const = 0;
 
     virtual ~IXmlDataManager();
+
+private:
+
+    virtual void buildRouteEventsFromComponents(const shared_ptr<IXmlComponent> components) = 0;
+
 };
 
 #endif // IXMLDATAMANAGER_H

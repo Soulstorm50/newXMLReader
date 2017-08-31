@@ -2,7 +2,7 @@
 
 CXmlCompositeComponent::CXmlCompositeComponent(const QString &name):
     componentName(name)
-   ,componentValue("")
+   ,componentValue(EMPTY_STRING)
 {
 
 }
